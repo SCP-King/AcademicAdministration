@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.CourseDao">
+    <insert id="addCourse" parameterType="com.example.academicadministration.pojo.Course">
+        insert into course
+(coursename, courselimit, courseday, coursetime, courseroom, coursekind)
+values (#{coursename},#{courselimit},#{courseday},#{coursetime},#{courseroom},#{coursekind})
+    </insert>
+    <delete id="deleteCourse">
+        delete from course where courseid=#{courseid}
+    </delete>
+
+    <select id="browseCourse" resultType="com.example.academicadministration.pojo.Course">
+        select * from course where courseid like #{condition} or courseroom like #{condition} or coursetime like #{condition} or courseday like #{condition} or coursekind like #{condition} or coursename like #{condition} or courselimit like #{condition} or coursenumber like #{condition}
+    </select>
+    <select id="checkTeacher" resultType="java.lang.String">
+        select teaid from teacourse where courseid=#{courseid} and teaid=#{teaid}
+    </select>
+    <insert id="addTeacherCourse">
+        insert ignore  into teacourse (teaid, courseid) values (#{teaid},#{courseid})
+    </insert>
+    <delete id="deleteTeacherCourse">
+        delete from teacourse where teaid=#{stuid} and courseid=#{courseid}
+    </delete>
+    <insert id="addStudentCourse">
+        insert ignore into stucourse (stuid, courseid) values (#{stuid},#{courseid})
+    </insert>
+    <update id="addNum">
+        update course set coursenumber=coursenumber+1 where courseid=#{courseid}
+    </update>
+    <delete id="deleteStudentCourse">
+        delete from stucourse where stuid=#{stuid} and courseid=#{courseid}
+    </delete>
+    <update id="deleteNum">
+        update course set coursenumber=coursenumber-1 where courseid=#{courseid}
+    </update>
+    <select id="myCourse" resultType="com.example.academicadministration.pojo.Course">
+        select * from course where courseid in (select courseid from stucourse where stuid=#{stuid})
+    </select>
+    <select id="TmyCourse" resultType="com.example.academicadministration.pojo.Course">
+        select * from course where courseid in (select courseid from teacourse where teaid=#{teaid})
+    </select>
+    <select id="browseScore" resultType="java.lang.String">
+        select coursescore from stucourse where stuid=#{stuid} and courseid=#{courseid}
+    </select>
+    <update id="updateScore">
+        update stucourse set coursescore=#{coursescore} where stuid=#{stuid} and courseid=#{courseid}
+    </update>
+</mapper>

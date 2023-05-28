@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.StudentDao">
+    <insert id="addStudent" parameterType="com.example.academicadministration.pojo.Student">
+        insert ignore into student
+            (stuid, stupwd, stuname, stusex, sturace, stuorigin, stuenrollment, stucollege, stumajor, stuclass, stuphone, stuphoto)
+        VALUES(#{stuid},#{stupwd},#{stuname},#{stusex},#{sturace},#{stuorigin},#{stuenrollment},#{stucollege},#{stumajor},#{stuclass},#{stuphone},#{stuphoto})
+    </insert>
+    <delete id="deleteStudent">
+        delete from student where stuid=#{stuid}
+    </delete>
+    <update id="inauditStudent">
+        update student set stustate=false where stuid=#{stuid}
+    </update>
+    <update id="auditStudent">
+        update student set stustate=true where stuid=#{stuid}
+    </update>
+    <update id="reset">
+        update student set stupwd=#{newpwd} where stuid=#{stuid} and stupwd=#{stupwd}
+    </update>
+    <select id="browseStudent" resultType="com.example.academicadministration.pojo.Student">
+        select * from student where stuid like #{condition} or stusex like #{condition} or stuclass like #{condition} or stuorigin like #{condition}
+or sturace like #{condition} or stucollege like #{condition} or stuenrollment like #{condition} or stumajor like #{condition} or stuname like #{condition}
+or stuphone like #{condition}
+    </select>
+    <select id="myStudent" resultType="com.example.academicadministration.pojo.Student">
+        select * from student where stuid in (select stuid from stucourse where courseid=#{courseid})
+    </select>
+</mapper>

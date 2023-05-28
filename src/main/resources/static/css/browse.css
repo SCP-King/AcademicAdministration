@@ -1,0 +1,269 @@
+/* 页面样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* 表格样式 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #3f3f3f;
+    color: #fff;
+}
+
+/* 输入框和按钮样式 */
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #3f3f3f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 开关按钮的样式 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* 开关按钮的input元素的样式 */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 开关按钮的滑块的样式 */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+/* 开关按钮的滑块的样式当选中时 */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* 开关按钮的input元素选中时的样式 */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+/* 开关按钮的input元素选中时滑块的样式 */
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+.button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0062cc;
+}
+
+.delete,.reset{
+    background-color: #dc3545;
+}
+
+.chose,.myStudent ,.myHomework,.myVideo{
+    background-color: #0080ff;
+}
+
+.delete:hover,.reset:hover {
+    background-color: #c82333;
+}
+.chose:hover,.myStudent:hover,.myHomework:hover,.myVideo:hover {
+    background-color: #0080ff;
+}
+.Id {
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+.Id:before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff6600;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.Id:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.Id:hover {
+    color: #ff6600;
+    font-weight: bold;
+}
+#lab {
+    float: right;
+    margin-top: 10px;
+}
+
+#lab span {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+}
+#addlab {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#addlab span {
+    display: inline-block;
+}
+
+#addlab .plus {
+    margin-left: 5px;
+}
+.addTea {
+    background-color: #4CAF50; /* 设置背景颜色 */
+    border: none; /* 去除边框 */
+    color: white; /* 设置文字颜色 */
+    padding: 3px 5px; /* 设置内边距 */
+    text-align: center; /* 设置文字居中 */
+    text-decoration: none; /* 去除下划线 */
+    display: inline-block; /* 将按钮设为块级元素 */
+    font-size: 7px; /* 设置字体大小 */
+    margin: 4px 2px; /* 设置按钮之间的间距 */
+    cursor: pointer; /* 设置光标为手型 */
+    border-radius: 4px; /* 设置圆角 */
+    transition-duration: 0.4s; /* 设置过渡时间 */
+}
+
+.addTea:hover {
+    background-color: #3e8e41; /* 设置鼠标悬停时的背景颜色 */
+}
+select.Tea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+    width: 100px;
+}
+
+select.Tea option {
+    padding: 5px;
+}
+
+.select-arrow {
+    position: relative;
+    top: 1px;
+    right: 8px;
+    pointer-events: none;
+    border-style: solid;
+    border-width: 0.15em 0.15em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.45em;
+    vertical-align: middle;
+    width: 0.45em;
+    transform: rotate(45deg);
+    transition: all 0.3s ease-in-out;
+}
+
+.select-arrow::before {
+    position: absolute;
+    top: -0.3em;
+    right: -0.3em;
+    pointer-events: none;
+    border-style: solid;
+    border-width: 0.15em 0.15em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.45em;
+    vertical-align: middle;
+    width: 0.45em;
+    transform: rotate(90deg);
+    transition: all 0.3s ease-in-out;
+}
+
+select.Tea:focus,
+select.Tea:hover {
+    outline: none;
+    border-color: #999;
+}
+
+.select-arrow:hover {
+    transform: rotate(135deg);
+}
+
+.select-arrow:hover::before {
+    transform: rotate(225deg);
+}

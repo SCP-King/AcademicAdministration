@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生注册页面</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/stuRegister.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/register.css"/>
+</head>
+<body>
+<form action="/student/register" method="post" id="myForm" enctype="multipart/form-data">
+    <label>
+        用户名
+        <input type="text" name="stuid" required="required">
+    </label>
+    <br/>
+    <label>
+        密码
+        <input type="password" name="stupwd" required="required">
+    </label>
+    <br/>
+    <label>
+        姓名
+        <input type="text" name="stuname" required="required">
+    </label>
+    <br/>
+    <label>
+        性别
+        <input type="radio" value="男" name="stusex">男
+        <input type="radio" value="女" name="stusex">女
+    </label>
+    <br/>
+    <label>
+        民族
+        <input type="text" name="sturace" required="required">
+    </label>
+    <br/>
+    <label>
+        籍贯
+        <input type="text" name="stuorigin" required="required">
+    </label>
+    <br/>
+    <label>
+        入学年
+        <input type="text" name="stuenrollment" required="required">
+    </label>
+    <br/>
+    <label>
+        学院
+        <select name="stucollege" id="stucollege">
+            <option value="无">学院</option>
+            <option value="信息科学与技术学院">信息科学与技术学院</option>
+            <option value="土木工程学院">土木工程学院</option>
+            <option value="机械工程学院">机械工程学院</option>
+
+        </select>
+    </label>
+    <label>
+        专业
+        <select name="stumajor" id="stumajor">
+            <option value="无">专业</option>
+        </select>
+    </label>
+    <label>
+        班级
+        <select name="stuclass">
+            <option value="无">班级</option>
+            <option value="1班">1班</option>
+            <option value="2班">2班</option>
+            <option value="3班">3班</option>
+        </select>
+    </label>
+    <br/>
+    <label>
+        电话号码
+        <input type="text" name="stuphone" id="phone" required="required">
+    </label>
+    <label>
+        验证码
+        <input type="text" id="flag" required="required">
+        <p id="getflag" style="background-color: lightskyblue">点击获取验证码</p>
+    </label>
+    <br/>
+    <label>
+        头像
+        <input type="file" name="photo" id="stuphoto">
+    </label>
+    <br/>
+    <input type="submit" value="注册">
+</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>老师个人信息</title>
+    <link type="text/css" rel="stylesheet" href="/css/detail.css">
+</head>
+<body>
+<header>
+    <h1>老师信息</h1>
+</header>
+<table>
+    <tr>
+        <th>用户名</th>
+        <td th:text="${tea.getTeaid()}">张三</td>
+    </tr>
+    <tr>
+        <th>头像</th>
+        <td th:if="${Img}!=null"><img th:src="@{${Img}}" alt="头像" width="100" height="100"></td>
+        <td th:unless="${Img}!=null"><img src="/img/default.png" alt="头像" width="100" height="100"></td>
+    </tr>
+    <tr>
+        <th>姓名</th>
+        <td th:text="${tea.getTeaname()}">张三</td>
+    </tr>
+    <tr>
+        <th>性别</th>
+        <td th:text="${tea.getTeasex()}">男</td>
+    </tr>
+    <tr>
+        <th>民族</th>
+        <td th:text="${tea.getTearace()}">汉族</td>
+    </tr>
+    <tr>
+        <th>籍贯</th>
+        <td th:text="${tea.getTeaorigin()}">北京市</td>
+    </tr>
+    <tr>
+        <th>学院</th>
+        <td th:text="${tea.getTeacollege()}">信息科学与技术学院</td>
+    </tr>
+    <tr>
+        <th>职位</th>
+        <td th:text="${tea.getTeapost()}">教授</td>
+    </tr>
+    <tr>
+        <th>毕业学校</th>
+        <td th:text="${tea.getTeagraduation()}">清华大学</td>
+    </tr>
+    <tr>
+        <th>学历</th>
+        <td th:text="${tea.getTeadegree()}">博士</td>
+    </tr>
+    <tr>
+        <th>电话号码</th>
+        <td th:text="${tea.getTeaphone()}">1234567890</td>
+    </tr>
+    <tr>
+        <th>账号是否被激活</th>
+        <td class="active" th:if="${tea.getTeastate()}">是</td>
+        <td class="inactive" th:unless="${tea.getTeastate()}">否</td>
+    </tr>
+</table>
+</body>
+</html>

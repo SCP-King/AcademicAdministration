@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览老师</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/browseTeacher.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/browse.css">
+</head>
+<body>
+<label id="lab">
+    <span>关键字搜索</span><input type="text" name="condition" id="condition"><button id="find">搜索</button>
+</label>
+<table>
+    <tr>
+        <th>用户名</th>
+        <th>头像</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>账号是否激活</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="i : ${teaList}">
+        <td><a th:text="${i.getTeaid()}" th:href="@{/manger/teacherDetail(teaid=${i.getTeaid()})}" target="_blank" class="Id"></a></td>
+        <td th:if="${teaImg.get(i.getTeaid())}==null"><img src="/img/default.png"></td>
+        <td th:unless="${teaImg.get(i.getTeaid())}==null"><img th:src="@{${teaImg.get(i.getTeaid())}}"></td>
+        <td th:text="${i.getTeaname()}"></td>
+        <td th:text="${i.getTeasex()}"></td>
+        <td th:if="${i.getTeastate()}">
+            <label class="switch">
+                <a th:href="@{/manger/inauditTeacher(teaid=${i.getTeaid()})}">
+                    <input type="checkbox" checked="checked">
+                    <span class="slider"></span>
+                </a>
+            </label>
+        </td>
+        <td th:unless="${i.getTeastate()}">
+            <label class="switch">
+                <a th:href="@{/manger/auditTeacher(teaid=${i.getTeaid()})}">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </a>
+            </label>
+        </td>
+        <td>
+            <a th:href="@{/manger/deleteTeacher(teaid=${i.getTeaid()})}" class="button delete">删除</a>
+            <a th:href="@{/manger/resetTeacher(teaid=${i.getTeaid()},teapwd=${i.getTeapwd()})}" class="button reset">重置密码</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,61 @@
+form {
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: linear-gradient(to bottom right, #ffffff, #cccccc);
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 15pt;
+}
+
+input[type="text"], input[type="password"], select, input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+body {
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+select{
+    font-size: 15pt;
+}

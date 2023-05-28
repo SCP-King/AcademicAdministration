@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作业详情</title>
+    <link rel="stylesheet" type="text/css" href="/css/homeworkDetail.css">
+</head>
+<body>
+<div class="homework">
+    <h1 th:text="第+${homework.getHomeworkid()}+次作业"></h1>
+    <p th:text="'作业要求:   '+${homework.getHomeworkrequest()}"></p>
+    <img th:src="@{${homeworkImg}}">
+    <br/>
+    <span th:text="'开始时间:  '+${homework.getStartline()}"></span>
+    <br/>
+    <span th:text="'结束时间:  '+${homework.getEndline()}"></span>
+</div>
+<div class="answer-container">
+    <h1>学生答案</h1>
+    <div class="answer-item" th:each="i : ${studentList}">
+        <img th:if="${stuImg.get(i.getStuid())}!=null"  th:src="@{${stuImg.get(i.getStuid())}}"  class="avatar">
+        <img th:if="${stuImg.get(i.getStuid())}==null"  src="/img/default.png"  class="avatar">
+        <span th:text="${i.getStuclass()}">班级</span>
+        <span th:text="${i.getStuname()}">姓名</span>
+        <p th:if="${i.getMyAnswer()!=null}" th:text="'提交时间: '+${i.getMyAnswer().getSubmittime()}">提交时间</p>
+        <img th:if="${i.getMyAnswer()!=null}" th:src="@{${answerImg.get(i.getStuid())}}"   class="stuAnswer">
+        <p th:unless="${i.getMyAnswer()!=null}">该同学尚未提交</p>
+        <span th:if="${i.getMyAnswer()!=null and i.getMyAnswer().getScore()>0}" th:text="${i.getMyAnswer().getScore()}"></span>
+        <form th:action="@{/teacher/updateHScore(stuid=${i.getStuid()},homeworkid=${homework.getHomeworkid()})}"  method="post" class="an_score">
+            <input type="text" placeholder="暂无分数" name="score">
+            <input type="submit" value="判分">
+        </form>
+    </div>
+</div>
+</body>
+</html>

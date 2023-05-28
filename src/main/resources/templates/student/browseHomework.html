@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程作业</title>
+    <link type="text/css" rel="stylesheet" href="/css/browseHomework.css">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/browseHomework.js"></script>
+</head>
+<body>
+    <label id="homeworkLab1">
+        <span id="sp1"><input type="radio" value="0" name="kind">全部</span>
+        <span id="sp2"><input type="radio" value="1" name="kind">已过期</span>
+        <span id="sp3"><input type="radio" value="2" name="kind">未过期</span>
+    </label>
+<div class="homework-container">
+    <div class="homework-item" th:each="i : ${homeworkList}">
+        <a th:href="@{/student/homeworkDetail(homeworkid=${i.getHomeworkid()})}" target="_blank" class="a">
+            <span th:text="第+${i.getHomeworkid()}+次作业"></span>
+            <br/>
+            开始时间:<span style="font-size: 18px" th:text="${i.getStartline()}"></span>
+            <br/>
+            结束时间:<span style="font-size: 18px" th:text="${i.getEndline()}"></span>
+            <br/>
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.TeacherDao">
+    <insert id="addTeacher" parameterType="com.example.academicadministration.pojo.Teacher">
+        insert ignore into teacher
+            (teaid, teapwd, teaname, teasex, tearace, teaorigin, teacollege, teapost, teagraduation, teadegree, teaphone, teaphoto)
+        VALUES (#{teaid},#{teapwd},#{teaname},#{teasex},#{tearace},#{teaorigin},#{teacollege},#{teapost},#{teagraduation},#{teadegree},#{teaphone},#{teaphoto})
+    </insert>
+    <delete id="deleteTeacher">
+        delete from teacher where teaid=#{teaid}
+    </delete>
+    <update id="inauditTeacher">
+        update teacher set teastate=false where teaid=#{teaid}
+    </update>
+    <update id="auditTeacher">
+        update teacher set teastate=true where teaid=#{teaid}
+    </update>
+    <update id="reset">
+        update teacher set teapwd=#{newpwd} where teaid=#{teaid} and teapwd=#{teapwd}
+    </update>
+    <select id="browseTeacher" resultType="com.example.academicadministration.pojo.Teacher">
+        select * from teacher where teaid like #{condition} or teaname like #{condition} or teadegree like #{condition} or teagraduation like #{condition}
+or teaorigin like #{condition} or tearace like #{condition} or teacollege like #{condition} or teaphone like #{condition} or teapost like #{condition} or teasex like #{condition}
+    </select>
+</mapper>

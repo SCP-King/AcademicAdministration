@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程浏览</title>
+  <link type="text/css" rel="stylesheet" href="/css/browse.css">
+</head>
+<body>
+<table>
+  <tr>
+    <th>课程编号</th>
+    <th>课程名称</th>
+    <th>已选课人数</th>
+    <th>课程限选人数</th>
+    <th>课程时间</th>
+    <th>课程教室</th>
+    <th>课程种类</th>
+    <th>操作</th>
+  </tr>
+  <tr th:each="i : ${courseList}">
+    <td th:text="${i.getCourseid()}"></td>
+    <td th:text="${i.getCoursename()}"></td>
+    <td th:text="${i.getCoursenumber()}"></td>
+    <td th:text="${i.getCourselimit()}"></td>
+    <td th:text="${i.getCourseday()+' '+i.getCoursetime()}"></td>
+    <td th:text="${i.getCourseroom()}"></td>
+    <td th:text="${i.getCoursekind()}"></td>
+    <td>
+      <a th:href="@{/teacher/myStudent(courseid=${i.getCourseid()})}" class="button myStudent" target="_blank">已选学生列表</a>
+      <a th:href="@{/teacher/browseHomework(courseid=${i.getCourseid()})}" class="button myHomework" target="_blank">课程作业</a>
+      <a th:href="@{/teacher/browseVideo(courseid=${i.getCourseid()})}" class="button myVideo" target="_blank">课程视频</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

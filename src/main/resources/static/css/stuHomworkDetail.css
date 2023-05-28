@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.homework,.myAnswer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.homework h1 {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.homework p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.homework img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 10px auto;
+}
+
+form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+form label {
+    color: #333;
+    font-size: 16px;
+}
+
+form input[type="file"] {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    border: none;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+form input[type="submit"] {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgreen;
+    cursor: pointer;
+}

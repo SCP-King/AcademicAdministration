@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.VideoDao">
+    <insert id="addVideo" parameterType="com.example.academicadministration.pojo.Video">
+        insert into video (courseid, videoname, videointroducation,videocover, videofile,videotime)
+        VALUES (#{courseid},#{videoname},#{videointroducation},#{videocover},#{videofile},#{videotime})
+    </insert>
+    <select id="browseVideo" resultType="com.example.academicadministration.pojo.Video">
+        select * from video where videoid like #{condition} or videoname like #{condition} or videointroducation like #{condition} order by videotime
+    </select>
+    <delete id="deleteVideo">
+        delete from video where videoid=#{videoid}
+    </delete>
+</mapper>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作业浏览</title>
+  <link type="text/css" rel="stylesheet" href="/css/add.css">
+  <link type="text/css" rel="stylesheet" href="/css/browseHomework.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/js/browseHomework.js"></script>
+</head>
+<body>
+<label id="addlab">
+  <span class="plus" id="addVideo">添加作业+</span>
+</label>
+<div id="overlay" class="overlay"></div>
+<div id="popup" class="popup">
+  <button id="closebtn">×</button>
+  <form action="/teacher/addHomework" id="myForm" method="post" enctype="multipart/form-data">
+    <label>
+      作业要求
+      <input type="text" name="homeworkrequest" required="required">
+    </label>
+    <label>
+      作业图片
+      <input type="file" name="homework" id="homework" required="required">
+    </label>
+    <label>
+      开始时间
+      <input type="date" name="startline"  required="required">
+    </label>
+    <label>
+      结束时间
+      <input type="date" name="endline"  required="required">
+    </label>
+    <input type="submit" value="添加">
+  </form>
+</div>
+<label id="homeworkLab2">
+  <span id="sp1"><input type="radio" value="0" name="kind">全部</span>
+  <span id="sp2"><input type="radio" value="1" name="kind">已过期</span>
+  <span id="sp3"><input type="radio" value="2" name="kind">未过期</span>
+</label>
+<div class="homework-container">
+  <div class="homework-item" th:each="i : ${homeworkList}">
+    <a th:href="@{/teacher/homeworkDetail(homeworkid=${i.getHomeworkid()})}" target="_blank" class="a">
+      <span th:text="第+${i.getHomeworkid()}+次作业"></span>
+      <br/>
+      开始时间:<span style="font-size: 18px" th:text="${i.getStartline()}"></span>
+      <br/>
+      结束时间:<span style="font-size: 18px" th:text="${i.getEndline()}"></span>
+      <br/>
+    </a>
+    <a th:href="@{/teacher/deleteHomework(homeworkid=${i.getHomeworkid()})}">
+      <button class="delete-button">
+        <i class="fas fa-trash"></i>
+      </button>
+    </a>
+  </div>
+</div>
+</body>
+</html>

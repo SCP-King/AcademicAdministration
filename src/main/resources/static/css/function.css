@@ -1,0 +1,118 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://picsum.photos/1920/1080");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: #8c00ff;
+}
+/*侧边栏选择器*/
+.sidenav {
+    height: 100%;
+    width: 0; /*原始宽度*/
+    position: fixed;
+    /*z-index、top、left共同控制侧栏的悬浮（上方1，下方-1）*/
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s; /*侧栏延迟0.5s显示*/
+    padding-top: 60px;
+}
+
+/*侧边栏标签选择器*/
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s; /*标签延迟0.3s显示*/
+}
+
+/*侧栏标签和关闭按钮光标的效果*/
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/*侧栏和关闭按钮的位置选择器*/
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/*主体内容*/
+#main {
+    transition: margin-left .5s;/*主体内容延迟0.5s整体y右移动*/
+    padding: 16px;
+}
+
+/*当文档高度小于450px时，改变侧栏的padding属性和字体大小*/
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    float: right;
+}
+
+.user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    color: #8c00ff;
+    font-size: 24px;
+}
+
+header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #8c00ff;
+    font-size: 48px;
+}
+
+
+section iframe {
+    display: block;
+    width: 70%;
+    height: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    object-fit: cover;
+}
+aside {
+    position: absolute;
+    left: 0;
+    top: 5%;
+    background-color: rgba(255, 255, 255, 0.49);
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}

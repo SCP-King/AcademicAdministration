@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作业详情</title>
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/js/homeworkDetail.js"></script>
+  <link type="text/css" rel="stylesheet" href="/css/stuHomworkDetail.css">
+</head>
+<body>
+<div class="homework">
+  <h1 th:text="第+${homework.getHomeworkid()}+次作业"></h1>
+  <p th:text="'作业要求: '+${homework.getHomeworkrequest()}"></p>
+  <img th:src="@{${homeworkImg}}">
+  <br/>
+  <span th:text="'开始时间:  '+${homework.getStartline()}"></span>
+  <br/>
+  <span th:text="'结束时间:  '+${homework.getEndline()}"></span>
+</div>
+<form action="/student/addAnswer" method="post" th:if="${answer}==null" id="myForm1" enctype="multipart/form-data">
+  <label>
+    上传图片(可多次上传，以最后一次为最终答案)
+    <br/>
+    <input type="file" id="answerImg1" required="required">
+    <input type="submit" value="提交">
+  </label>
+</form>
+<form action="/student/updateAnswer" method="post" th:if="${answer}!=null" id="myForm2" enctype="multipart/form-data">
+  <label>
+    上传图片(可多次上传，以最后一次为最终答案)
+    <br/>
+    <input type="file" id="answerImg2" required="required">
+    <input type="submit" value="提交">
+  </label>
+</form>
+<div class="myAnswer">
+<h1>你的答案</h1>
+<br/>
+<span th:if="${answerImg!=null}" th:text="'上传时间:' +${answer.getSubmittime()}"></span>
+<br/>
+<img th:if="${answerImg!=null}" th:src="${answerImg}">
+<br/>
+<span th:if="${answer}!=null and ${answer.getScore()>0}" th:text="${answer.getScore()}">分数</span>
+<span th:if="${answer}==null">暂无分数</span>
+</div>
+</body>
+</html>

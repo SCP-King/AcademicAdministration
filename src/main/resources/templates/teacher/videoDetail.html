@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教学视频</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/videodetail.css">
+</head>
+<body>
+<header><h1 th:text="${video.getVideoname()}">视频标题</h1></header>
+<section>
+    <div>
+        <span th:text="${video.getVideotime()}" id="span">时间</span>
+        <p th:text="${video.getVideointroducation()}">视频简介</p>
+    </div>
+</section>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#v").insertBefore($("#span"))
+    })
+</script>

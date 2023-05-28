@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览课程</title>
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="/js/browseCourse.js"></script>
+  <link type="text/css" rel="stylesheet" href="/css/add.css">
+  <link type="text/css" rel="stylesheet" href="/css/browse.css">
+</head>
+<body>
+<label id="addlab">
+  <span class="plus" id="addCourse">添加课程+</span>
+</label>
+<div id="overlay" class="overlay"></div>
+<div id="popup" class="popup">
+  <button id="closebtn">×</button>
+  <form action="/manger/addCourse" id="myForm" method="post">
+    <label>
+      课程名称
+      <input type="text" name="coursename" required="required">
+    </label>
+    <label>
+      课程限制人数
+      <input type="number" name="courselimit" required="required">
+    </label>
+    <label>
+      课程日期
+      <select name="courseday">
+        <option value="无">请选择</option>
+        <option value="星期一">星期一</option>
+        <option value="星期二">星期二</option>
+        <option value="星期三">星期三</option>
+        <option value="星期四">星期四</option>
+        <option value="星期五">星期五</option>
+      </select>
+    </label>
+    <label>
+      课程时间段
+      <select name="coursetime">
+        <option value="无">请选择</option>
+        <option value="8:00~9:35">8:00~9:35</option>
+        <option value="9:50~12:15">9:50~12:15</option>
+        <option value="14:00~15:35">14:00~15:35</option>
+        <option value="15:50~17:25">15:50~17:25</option>
+        <option value="19:00~21:25">19:00~21:25</option>
+      </select>
+    </label>
+    <label>
+      课程教室
+      <input type="text" name="courseroom" required="required">
+    </label>
+    <label>
+      课程种类
+      <select name="coursekind">
+        <option value="无">请选择</option>
+        <option value="实验">实验</option>
+        <option value="理论">理论</option>
+      </select>
+    </label>
+    <input type="submit" value="添加">
+  </form>
+</div>
+<label id="lab">
+  <span>课程关键字搜索</span><input type="text" name="condition" id="condition">
+  <span>老师关键字搜索</span><input type="text" name="teaCondition" id="teaCondition">
+  <button id="find">搜索</button>
+</label>
+<table>
+  <tr>
+    <th>课程编号</th>
+    <th>课程名称</th>
+    <th>已选课人数</th>
+    <th>课程限选人数</th>
+    <th>课程时间</th>
+    <th>课程教室</th>
+    <th>课程种类</th>
+    <th>授课教师姓名</th>
+    <th>操作</th>
+  </tr>
+  <tr th:each="i : ${courseList}">
+    <td th:text="${i.getCourseid()}"></td>
+    <td th:text="${i.getCoursename()}"></td>
+    <td th:text="${i.getCoursenumber()}"></td>
+    <td th:text="${i.getCourselimit()}"></td>
+    <td th:text="${i.getCourseday()+' '+i.getCoursetime()}"></td>
+    <td th:text="${i.getCourseroom()}"></td>
+    <td th:text="${i.getCoursekind()}"></td>
+    <td th:if="${i.getTeacher()}!=null" th:text="${i.getTeacher().getTeaname()}"></td>
+    <td th:unless="${i.getTeacher()}!=null">
+      <form th:action="@{/manger/addTeacherCourse(courseid=${i.getCourseid()})}" method="post">
+      <select name="teaid" class="Tea">
+        <option value="无">暂无老师</option>
+        <option th:each="j : ${teachers}" th:value="${j.getTeaid()}" >
+          <a class="addTea" th:text="${j.getTeaname()}"></a>
+        </option>
+      </select>
+      <button class="addTea" id="addTea" type="submit">点击添加</button>
+      </form>
+    </td>
+    <td>
+      <a th:href="@{/manger/deleteCourse(courseid=${i.getCourseid()})}" class="button delete">删除</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

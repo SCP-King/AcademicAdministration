@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.AnswerDao">
+<insert id="addAnswer" parameterType="com.example.academicadministration.pojo.Answer">
+    insert into answer (stuid, homeworkid, score, answerfile, submittime)
+    VALUES(#{stuid},#{homeworkid},#{score},#{answerfile},#{submittime})
+</insert>
+    <update id="updateAnswer" parameterType="com.example.academicadministration.pojo.Answer">
+        update answer set answerfile=#{answerfile},submittime=#{submittime} where stuid=#{stuid} and homeworkid=#{homeworkid}
+    </update>
+    <select id="myAnswer" resultType="com.example.academicadministration.pojo.Answer">
+        select * from answer where stuid=#{stuid} and homeworkid=#{homeworkid}
+    </select>
+    <update id="updateScore" parameterType="com.example.academicadministration.pojo.Answer">
+        update answer set score=#{score} where stuid=#{stuid} and homeworkid=#{homeworkid}
+    </update>
+    <delete id="deleteAnswer">
+        delete from answer where stuid=#{stuid} and homeworkid=#{homeworkid}
+    </delete>
+</mapper>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生答案</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div th:each="i :${answerList}">
+  <h1 th:text="'学号: '+${i.getStuid()}"></h1>
+  <form th:action="@{/teacher/updateScore(answer=${anserJson.get(i.getStuid())})}">
+    <input type="number" th:value="${i.getScore()}" name="score">
+    <input type="submit" value="判分">
+  </form>
+</div>
+</body>
+</html>

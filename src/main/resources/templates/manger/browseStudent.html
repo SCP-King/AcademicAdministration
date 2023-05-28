@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览学生</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/browseStudent.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/browse.css">
+</head>
+<body>
+<label id="lab">
+    <span>关键字搜索</span><input type="text" name="condition" id="condition"><button id="find">搜索</button>
+</label>
+<table>
+    <tr>
+        <th>用户名</th>
+        <th>头像</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>账号是否激活</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="i: ${stuList}">
+        <td><a th:text="${i.getStuid()}" th:href="@{/manger/studentDetail(stuid=${i.getStuid()})}" target="_blank" class="Id"></a></td>
+        <td th:if="${stuImg.get(i.getStuid())}==null"><img src="/img/default.png"></td>
+        <td th:unless="${stuImg.get(i.getStuid())}==null"><img th:src="@{${stuImg.get(i.getStuid())}}"></td>
+        <td th:text="${i.getStuname()}"></td>
+        <td th:text="${i.getStusex()}"></td>
+        <td th:if="${i.getStustate()}">
+            <label class="switch">
+                <a th:href="@{/manger/inauditStudent(stuid=${i.getStuid()})}">
+            <input type="checkbox" checked="checked">
+            <span class="slider"></span>
+                </a>
+        </label>
+        </td>
+        <td th:unless="${i.getStustate()}">
+            <label class="switch">
+                <a th:href="@{/manger/auditStudent(stuid=${i.getStuid()})}">
+            <input type="checkbox">
+            <span class="slider"></span>
+                </a>
+        </label>
+        </td>
+        <td>
+            <a th:href="@{/manger/deleteStudent(stuid=${i.getStuid()})}" class="button delete">删除</a>
+            <a th:href="@{/manger/resetStudent(stuid=${i.getStuid()},stupwd=${i.getStupwd()})}" class="button reset">重置密码</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

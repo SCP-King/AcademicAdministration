@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.homework {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid lightblue; /* 添加这一行 */
+    background-color: lightblue; /* 添加这一行 */
+}
+
+.homework h1 {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.homework p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.homework img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 10px auto;
+}
+
+.answer-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid lightblue;
+    background-color: lightblue;
+}
+
+.answer-container h1 {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.answer-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    border: 2px solid rgba(255, 255, 255, 0.49);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid gray;
+}
+
+.stuAnswer {
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+}
+.an_score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    margin: 10px auto;
+}
+
+.an_score input[type="text"] {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.an_score input[type="submit"] {
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}

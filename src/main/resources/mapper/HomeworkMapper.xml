@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.academicadministration.dao.HomeworkDao">
+<insert id="addHomework" parameterType="com.example.academicadministration.pojo.Homework">
+    insert into homework (courseid, startline, endline, homeworkrequest, homeworkfile)
+    VALUES(#{courseid},#{startline},#{endline},#{homeworkrequest},#{homeworkfile})
+</insert>
+    <delete id="deleteHomework">
+        delete from homework where homeworkid=#{homeworkid}
+    </delete>
+    <select id="browseHomeworkAll" resultType="com.example.academicadministration.pojo.Homework">
+        select * from homework where courseid = #{courseid}
+    </select>
+    <select id="browseHomework1" resultType="com.example.academicadministration.pojo.Homework">
+        select * from homework where endline &lt;= (select curdate()) and  courseid =#{courseid}
+    </select>
+    <select id="browseHomework2" resultType="com.example.academicadministration.pojo.Homework">
+        select * from homework where endline &gt; (select curdate()) and  courseid =#{courseid}
+    </select>
+</mapper>

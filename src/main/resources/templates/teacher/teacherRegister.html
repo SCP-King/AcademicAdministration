@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>老师注册页面</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/teaRegister.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/register.css"/>
+</head>
+<body>
+<form action="/teacher/register" method="post" id="myForm" enctype="multipart/form-data">
+   <label>
+       用户名
+       <input type="text" name="teaid">
+   </label>
+    <label>
+        密码
+        <input type="password" name="teapwd">
+    </label>
+    <label>
+        姓名
+        <input type="text" name="teaname">
+    </label>
+    <label>
+        性别
+        <input type="radio" name="teasex" value="男">男
+        <input type="radio" name="teasex" value="女">女
+    </label>
+    <label>
+        民族
+        <input type="text" name="tearace">
+    </label>
+    <label>
+        籍贯
+        <input type="text" name="teaorigin">
+    </label>
+    <label>
+        学院
+        <select name="teacollege">
+            <option value="无">学院</option>
+            <option value="信息科学与技术学院">信息科学与技术学院</option>
+            <option value="机械工程学院">机械工程学院</option>
+        </select>
+    </label>
+    <label>
+        职位
+        <select name="teapost">
+            <option value="无">职位</option>
+            <option value="院长">院长</option>
+            <option value="副院长">副院长</option>
+            <option value="教授">教授</option>
+            <option value="副教授">副教授</option>
+            <option value="讲师">讲师</option>
+            <option value="助教">助教</option>
+        </select>
+    </label>
+    <label>
+        毕业学校
+        <input type="text" name="teagraduation">
+    </label>
+    <label>
+        学历
+        <select name="teadegree">
+            <option value="无">学历</option>
+            <option value="博士后">博士后</option>
+            <option value="博士">博士</option>
+            <option value="研究生">研究生</option>
+            <option value="本科">本科</option>
+        </select>
+    </label>
+    <label>
+        电话号码
+        <input type="text" name="teaphone" id="phone">
+    </label>
+    <label>
+        验证码
+        <input type="text" id="flag" required="required">
+        <p id="getflag" style="background-color: lightskyblue">点击获取验证码</p>
+    </label>
+    <label>
+        上传头像
+        <input type="file" name="photo" id="teaphoto">
+    </label>
+    <input type="submit" value="注册">
+</form>
+</body>
+</html>

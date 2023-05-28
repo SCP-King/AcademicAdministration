@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>教学视频</title>
+  <link type="text/css" rel="stylesheet" href="/css/browseVideo.css">
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/js/browseVideo.js"></script>
+</head>
+<body>
+<label id="lab">
+  <span>关键字搜索</span><input type="text" name="condition" id="condition"><button id="find1">搜索</button>
+</label>
+<div class="video-container">
+  <div class="video-item" th:each="i : ${videoList}">
+    <a th:href="@{/teacher/videoDetail(videoid=${i.getVideoid()})}" target="_blank" class="a">
+      <img th:src="@{${videoImg.get(i.getVideoid())}}">
+      <p th:text="${i.getVideoid()}+': '+${i.getVideoname()}"></p>
+      <span th:text="${i.getVideotime()}"></span>
+    </a>
+  </div>
+</div>
+</body>
+</html>

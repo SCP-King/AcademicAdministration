@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员功能</title>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/mangerFunction.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/function.css">
+</head>
+<body>
+<div class="user-info">
+    <img src="/img/manger.png" alt="头像">
+    <span class="user-name">管理员</span>
+</div>
+<header style="text-align: center">
+    <h1>管理员功能页面</h1>
+</header>
+<aside>
+    <span style="font-size:30px; cursor:pointer" id="openbtn">&#9776; 主菜单</span>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" id="closebtn">&times;</a>
+        <a href="#">修改密码</a>
+        <a href="#" id="a2">学生管理</a>
+        <a href="#" id="a3">教师管理</a>
+        <a href="#" id="a4">课程管理</a>
+        <a href="#" id="a5">退出系统</a>
+    </div>
+</aside>
+<section style="text-align: center">
+    <iframe id="content" src="/weclome"></iframe>
+</section>
+</body>
+</html>
