@@ -5,7 +5,7 @@
     <insert id="addStudent" parameterType="com.example.academicadministration.pojo.Student">
         insert ignore into student
             (stuid, stupwd, stuname, stusex, sturace, stuorigin, stuenrollment, stucollege, stumajor, stuclass, stuphone, stuphoto)
-        VALUES(#{stuid},#{stupwd},#{stuname},#{stusex},#{sturace},#{stuorigin},#{stuenrollment},#{stucollege},#{stumajor},#{stuclass},#{stuphone},#{stuphoto})
+        VALUES(#{stuid},MD5(#{stupwd}),#{stuname},#{stusex},#{sturace},#{stuorigin},#{stuenrollment},#{stucollege},#{stumajor},#{stuclass},#{stuphone},#{stuphoto})
     </insert>
     <delete id="deleteStudent">
         delete from student where stuid=#{stuid}
@@ -17,7 +17,7 @@
         update student set stustate=true where stuid=#{stuid}
     </update>
     <update id="reset">
-        update student set stupwd=#{newpwd} where stuid=#{stuid} and stupwd=#{stupwd}
+        update student set stupwd=MD5(#{newpwd}) where stuid=#{stuid} and stupwd=MD5(#{stupwd})
     </update>
     <select id="browseStudent" resultType="com.example.academicadministration.pojo.Student">
         select * from student where stuid like #{condition} or stusex like #{condition} or stuclass like #{condition} or stuorigin like #{condition}

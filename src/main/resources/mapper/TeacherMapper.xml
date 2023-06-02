@@ -5,7 +5,7 @@
     <insert id="addTeacher" parameterType="com.example.academicadministration.pojo.Teacher">
         insert ignore into teacher
             (teaid, teapwd, teaname, teasex, tearace, teaorigin, teacollege, teapost, teagraduation, teadegree, teaphone, teaphoto)
-        VALUES (#{teaid},#{teapwd},#{teaname},#{teasex},#{tearace},#{teaorigin},#{teacollege},#{teapost},#{teagraduation},#{teadegree},#{teaphone},#{teaphoto})
+        VALUES (#{teaid},MD5(#{teapwd}),#{teaname},#{teasex},#{tearace},#{teaorigin},#{teacollege},#{teapost},#{teagraduation},#{teadegree},#{teaphone},#{teaphoto})
     </insert>
     <delete id="deleteTeacher">
         delete from teacher where teaid=#{teaid}
@@ -17,7 +17,7 @@
         update teacher set teastate=true where teaid=#{teaid}
     </update>
     <update id="reset">
-        update teacher set teapwd=#{newpwd} where teaid=#{teaid} and teapwd=#{teapwd}
+        update teacher set teapwd=MD5(#{newpwd}) where teaid=#{teaid} and teapwd=MD5(#{teapwd})
     </update>
     <select id="browseTeacher" resultType="com.example.academicadministration.pojo.Teacher">
         select * from teacher where teaid like #{condition} or teaname like #{condition} or teadegree like #{condition} or teagraduation like #{condition}

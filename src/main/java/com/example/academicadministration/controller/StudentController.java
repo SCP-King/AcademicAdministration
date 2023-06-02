@@ -17,6 +17,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -53,11 +55,15 @@ public class StudentController {
     @ResponseBody
     @RequestMapping("/login")
     public String login(String id, String pwd, HttpServletRequest request){
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(pwd.getBytes());
+        String Hpwd=new BigInteger(1,md.digest()).toString(16);
         List<Student> students=studentService.browseStudent("%%");
         for(Student i:students){
             if(i.getStuid().equals(id)){
-                if(i.getStupwd().equals(pwd)){
+                if(i.getStupwd().equals(Hpwd)){
                     if (i.getStustate()){
+                        i.setStupwd(pwd);
                         request.getSession().setAttribute("StudentPerson",i);
                         if(i.getStuphoto()!=null&&i.getStuphoto().length>0){
                             request.getSession().setAttribute("StudentPersonImg",getImg(i.getStuphoto()));

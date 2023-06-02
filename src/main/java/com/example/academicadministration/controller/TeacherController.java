@@ -19,6 +19,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -66,27 +68,18 @@ public class TeacherController {
 
     }
     @SneakyThrows
-    private  void deleteFiles(File directory) {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    deleteFiles(file); // 递归删除子目录中的文件
-                } else {
-                    file.delete(); // 删除文件
-                }
-            }
-        }
-    }
-    @SneakyThrows
     @ResponseBody
     @RequestMapping("/login")
     public String login(String id, String pwd, HttpServletRequest request){
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(pwd.getBytes());
+        String Hpwd=new BigInteger(1,md.digest()).toString(16);
         List<Teacher> teachers=teacherService.browseTeacher("%%");
         for(Teacher i:teachers){
             if(i.getTeaid().equals(id)) {
-                if(i.getTeapwd().equals(pwd)){
+                if(i.getTeapwd().equals(Hpwd)){
                     if(i.getTeastate()){
+                        i.setTeapwd(pwd);
                         request.getSession().setAttribute("TeacherPerson",i);
                         if(i.getTeaphoto()!=null&&i.getTeaphoto().length>0){
                             request.getSession().setAttribute("TeacherPersonImg",getImg(i.getTeaphoto()));

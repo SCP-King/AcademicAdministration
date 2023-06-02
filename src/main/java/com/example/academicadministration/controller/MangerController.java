@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.*;
 
 @Controller
@@ -51,10 +53,13 @@ public class MangerController {
     @RequestMapping("/login")
     public String login(String id, String pwd,HttpServletRequest request){
         String res=mangerService.login(id);
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(pwd.getBytes());
+        String Hpwd=new BigInteger(1,md.digest()).toString(16);
         if(res==null){
             return "用户不存在";
         }
-        else if(!res.equals(pwd)){
+        else if(!res.equals(Hpwd)){
             return "密码错误";
         }
         else {
