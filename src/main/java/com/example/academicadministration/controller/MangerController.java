@@ -1,10 +1,12 @@
 package com.example.academicadministration.controller;
 
-import com.example.academicadministration.pojo.*;
+import com.example.academicadministration.pojo.Course;
+import com.example.academicadministration.pojo.Student;
+import com.example.academicadministration.pojo.Teacher;
 import com.example.academicadministration.service.CourseService;
+import com.example.academicadministration.service.MangerService;
 import com.example.academicadministration.service.StudentService;
 import com.example.academicadministration.service.TeacherService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
@@ -18,7 +20,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.*;
 
 @Controller
@@ -30,6 +31,8 @@ public class MangerController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private MangerService mangerService;
     private Boolean check(Object o){
         return o==null||o.equals("");
     }
@@ -46,18 +49,41 @@ public class MangerController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/login")
-    public String login(String id, String pwd){
-        if(id.equals("管理员")&&pwd.equals("123456")){
-            return "登录成功";
+    public String login(String id, String pwd,HttpServletRequest request){
+        String res=mangerService.login(id);
+        if(res==null){
+            return "用户不存在";
+        }
+        else if(!res.equals(pwd)){
+            return "密码错误";
         }
         else {
-            return "登录失败";
-        }
+            request.getSession().setAttribute("mangerid",id);
+            return "登录成功";}
     }
     @RequestMapping("/function")
     public String function(Model model){
         return "/manger/mangerFunction";
     }
+    @RequestMapping("/toChangePwd")
+    public String toChangePwd(){
+        return "/manger/changePwd";
+    }
+    @SneakyThrows
+    @ResponseBody
+    @RequestMapping("/changePwd")
+    public String changePwd(String oldpwd, String newpwd1, HttpServletRequest request){
+        if(check(newpwd1)){
+            return "密码不能为空字符";
+        }
+        if(mangerService.reset((String) request.getSession().getAttribute("mangerid"),oldpwd,newpwd1)) {
+            return "修改成功";
+        }
+        else {
+            return "密码错误";
+        }
+    }
+
     @SneakyThrows
     @RequestMapping("/browseStudent")
     public String browseStudent(Model model,String condition){

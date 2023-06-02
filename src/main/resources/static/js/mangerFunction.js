@@ -5,6 +5,9 @@ $(document).ready(function (){
     $("#openbtn").click(function (){
         $("#mySidenav").css("width","250px")
     })
+    $("#a1").click(function (){
+        $("#content").attr("src","/manger/toChangePwd")
+        })
     $("#a2").click(function (){
         $("#content").attr("src","/manger/browseStudent")
     })
