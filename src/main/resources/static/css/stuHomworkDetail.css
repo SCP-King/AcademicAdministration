@@ -8,8 +8,9 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid lightblue; /* 添加这一行 */
+    background-color: lightblue; /* 添加这一行 */
 }
 
 .homework h1 {
