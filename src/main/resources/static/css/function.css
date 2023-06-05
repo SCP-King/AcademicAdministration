@@ -15,8 +15,20 @@ body {
 #openbtn {
     font-size: 30px;
     cursor: pointer;
-    color: #8c00ff;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transform: perspective(100px) rotateX(10deg);
 }
+
+#openbtn:hover {
+    transform: perspective(100px) rotateX(0deg) scale(1.1);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
 /*侧边栏选择器*/
 .sidenav {
     height: 100%;
@@ -83,8 +95,10 @@ body {
 }
 
 .user-name {
-    color: #8c00ff;
     font-size: 24px;
+    cursor: pointer;
+    color: #8c00ff;
+    -webkit-text-stroke: 2px #00ffff;
 }
 
 header {
@@ -93,8 +107,11 @@ header {
 }
 
 h1 {
-    color: #8c00ff;
     font-size: 48px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 
