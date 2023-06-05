@@ -42,7 +42,7 @@
 <img th:if="${answerImg!=null}" th:src="${answerImg}">
 <br/>
 <span th:if="${answer}!=null and ${answer.getScore()>0}" th:text="${answer.getScore()}">分数</span>
-<span th:if="${answer}==null">暂无分数</span>
+<span th:if="${answer}==null or ${answer.getScore()<0}">暂无分数</span>
 </div>
 </body>
 </html>
