@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="homework">
-  <h1 th:text="第+${homework.getHomeworkid()}+次作业"></h1>
+  <h1 th:text="第+${index}+次作业"></h1>
   <p th:text="'作业要求: '+${homework.getHomeworkrequest()}"></p>
   <img th:src="@{${homeworkImg}}">
   <br/>
@@ -17,7 +17,7 @@
   <br/>
   <span th:text="'结束时间:  '+${homework.getEndline()}"></span>
 </div>
-<form action="/student/addAnswer" method="post" th:if="${answer}==null" id="myForm1" enctype="multipart/form-data">
+<form action="/student/addAnswer" method="post" th:if="${answer}==null and !${#dates.createNow().after(homework.getEndline())}" id="myForm1" enctype="multipart/form-data">
   <label>
     上传图片(可多次上传，以最后一次为最终答案)
     <br/>
@@ -25,7 +25,7 @@
     <input type="submit" value="提交">
   </label>
 </form>
-<form action="/student/updateAnswer" method="post" th:if="${answer}!=null" id="myForm2" enctype="multipart/form-data">
+<form action="/student/updateAnswer" method="post" th:if="${answer}!=null and !${#dates.createNow().after(homework.getEndline())}" id="myForm2" enctype="multipart/form-data">
   <label>
     上传图片(可多次上传，以最后一次为最终答案)
     <br/>
@@ -34,6 +34,7 @@
   </label>
 </form>
 <div class="myAnswer">
+  <h1 th:if="${#dates.createNow().after(homework.getEndline())}" style="color: gray">该作业已经过期</h1>
 <h1>你的答案</h1>
 <br/>
 <span th:if="${answerImg!=null}" th:text="'上传时间:' +${answer.getSubmittime()}"></span>

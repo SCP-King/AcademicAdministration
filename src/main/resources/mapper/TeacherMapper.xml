@@ -17,7 +17,7 @@
         update teacher set teastate=true where teaid=#{teaid}
     </update>
     <update id="reset">
-        update teacher set teapwd=MD5(#{newpwd}) where teaid=#{teaid} and teapwd=MD5(#{teapwd})
+        update teacher set teapwd=MD5(#{newpwd}) where teaid=#{teaid} and teapwd=#{teapwd}
     </update>
     <select id="browseTeacher" resultType="com.example.academicadministration.pojo.Teacher">
         select * from teacher where teaid like #{condition} or teaname like #{condition} or teadegree like #{condition} or teagraduation like #{condition}

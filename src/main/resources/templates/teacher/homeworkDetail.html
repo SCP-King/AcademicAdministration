@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="homework">
-    <h1 th:text="第+${homework.getHomeworkid()}+次作业"></h1>
+    <h1 th:text="第+${index}+次作业"></h1>
     <p th:text="'作业要求:   '+${homework.getHomeworkrequest()}"></p>
     <img th:src="@{${homeworkImg}}">
     <br/>

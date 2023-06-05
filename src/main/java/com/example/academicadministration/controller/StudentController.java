@@ -115,11 +115,14 @@ public class StudentController {
     @ResponseBody
     @RequestMapping("/changePwd")
     public String changePwd(String oldpwd,String newpwd1,HttpServletRequest request){
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(oldpwd.getBytes());
+        String Hpwd=new BigInteger(1,md.digest()).toString(16);
         if(check(newpwd1)){
             return "密码不能为空字符";
         }
         Student t=(Student) request.getSession().getAttribute("StudentPerson");
-        if(studentService.reset(t.getStuid(),oldpwd,newpwd1)) {
+        if(studentService.reset(t.getStuid(),Hpwd,newpwd1)) {
             return "修改成功";
         }
         else {
@@ -259,9 +262,10 @@ public class StudentController {
     }
     @SneakyThrows
     @RequestMapping("/homeworkDetail")
-    public String homeworkDetail(String homeworkid,HttpServletRequest request,Model model){
+    public String homeworkDetail(String homeworkid,String index,HttpServletRequest request,Model model){
         if(homeworkid==null) homeworkid=(String) request.getSession().getAttribute("homeworkid");
         else request.getSession().setAttribute("homeworkid",homeworkid);
+        model.addAttribute("index",index);
         String courseid=(String) request.getSession().getAttribute("courseid");
         Student stu=(Student)request.getSession().getAttribute("StudentPerson");
         String stuid=stu.getStuid();
@@ -275,7 +279,9 @@ public class StudentController {
         }
        Answer answer=answerService.myAnswer(stuid,homeworkid);
         model.addAttribute("answer",answer);
+        if (answer!=null)
         model.addAttribute("answerImg",getImg(answer.getAnswerfile()));
+
         return "/student/homeworkDetail";
     }
     @ResponseBody

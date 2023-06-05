@@ -17,7 +17,7 @@ public class AnswerService  {
     }
 
     public Boolean updateScore(Answer answer) {
-        return answerDao.updateAnswer(answer)>0;
+        return answerDao.updateScore(answer)>0;
     }
     public Boolean deleteAnswer(String stuid,String homeworkid){
         return answerDao.deleteAnswer(stuid,homeworkid)>0;

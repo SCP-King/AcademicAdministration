@@ -23,7 +23,7 @@
     </label>
     <label>
       作业图片
-      <input type="file" name="homework" id="homework" required="required">
+      <input type="file" name="homework" id="homework" required="required" style="border: none">
     </label>
     <label>
       开始时间
@@ -42,14 +42,19 @@
   <span id="sp3"><input type="radio" value="2" name="kind">未过期</span>
 </label>
 <div class="homework-container">
-  <div class="homework-item" th:each="i : ${homeworkList}">
-    <a th:href="@{/teacher/homeworkDetail(homeworkid=${i.getHomeworkid()})}" target="_blank" class="a">
-      <span th:text="第+${i.getHomeworkid()}+次作业"></span>
+  <div class="homework-item" th:each="i,index : ${homeworkList}">
+    <a th:href="@{/teacher/homeworkDetail(homeworkid=${i.getHomeworkid()},index=${index.index})}" target="_blank" class="a">
+      <span th:text="第+${index.index}+次作业"></span>
       <br/>
       开始时间:<span style="font-size: 18px" th:text="${i.getStartline()}"></span>
       <br/>
       结束时间:<span style="font-size: 18px" th:text="${i.getEndline()}"></span>
       <br/>
+      已完成人数:<span style="font-size: 18px" th:text="${solveNum.get(i.getHomeworkid())}"></span>
+      <br/>
+      总人数:<span style="font-size: 18px" th:text="${allNum}"></span>
+      <br/>
+
     </a>
     <a th:href="@{/teacher/deleteHomework(homeworkid=${i.getHomeworkid()})}">
       <button class="delete-button">

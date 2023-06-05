@@ -130,11 +130,14 @@ public class TeacherController {
     @ResponseBody
     @RequestMapping("/changePwd")
     public String changePwd(String oldpwd,String newpwd1,HttpServletRequest request){
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(oldpwd.getBytes());
+        String Hpwd=new BigInteger(1,md.digest()).toString(16);
         if(check(newpwd1)){
             return "密码不能为空字符";
         }
         Teacher t=(Teacher) request.getSession().getAttribute("TeacherPerson");
-        if(teacherService.reset(t.getTeaid(),oldpwd,newpwd1)) {
+        if(teacherService.reset(t.getTeaid(),Hpwd,newpwd1)) {
             return "修改成功";
         }
         else {
@@ -289,13 +292,29 @@ public class TeacherController {
         else if(kind.equals("2")){
             homeworkList=homeworkService.browseHomework2(courseid);
         }
+            List<Student> studentList=studentService.myStudent(courseid);
+            HashMap<Integer,Integer> solveNum=new HashMap<>();
+            for(Homework i:homeworkList){
+                int num=0;
+                for(Student j:studentList){
+                    if(answerService.myAnswer(j.getStuid(), String.valueOf(i.getHomeworkid()))!=null) num++;
+                }
+                solveNum.put(i.getHomeworkid(),num);
+            }
             model.addAttribute("homeworkList",homeworkList);
+            model.addAttribute("solveNum",solveNum);
+            model.addAttribute("allNum",studentList.size());
             return "/teacher/browseHomework";
     }
     @SneakyThrows
     @RequestMapping("/homeworkDetail")
-    public String homeworkDetail(String homeworkid,Model model,HttpServletRequest request){
+    public String homeworkDetail(String homeworkid,String index,Model model,HttpServletRequest request){
        String courseid=(String) request.getSession().getAttribute("courseid");
+       if (check(homeworkid)) homeworkid= (String) request.getSession().getAttribute("Hid");
+       else request.getSession().setAttribute("Hid",homeworkid);
+       if (check(index)) index=(String) request.getSession().getAttribute("Index");
+       else request.getSession().setAttribute("Index",index);
+        model.addAttribute("index",index);
         List<Student> studentList=studentService.myStudent(courseid);
        List<Homework> homeworkList=homeworkService.browseHomeworkAll(courseid);
        HashMap<String,String> stuImg=new HashMap<>();
@@ -336,15 +355,19 @@ public class TeacherController {
     @RequestMapping("/updateHScore")
     public void updateHScore(String homeworkid,String stuid,String score,HttpServletResponse response){
         response.setCharacterEncoding("GBK");
+        if (check(score)) {
+            response.getWriter().print("<script>alert('分数不能为空');location.replace('/teacher/homeworkDetail')</script>");
+            return;
+        }
         Answer answer=new Answer();
         answer.setScore(Integer.parseInt(score));
         answer.setStuid(stuid);
         answer.setHomeworkid(Integer.parseInt(homeworkid));
         if(answerService.updateScore(answer)){
-            response.getWriter().print("<script>alert('判分成功');location.replace('/teacher/browseHomework')</script>");
+            response.getWriter().print("<script>alert('判分成功');location.replace('/teacher/homeworkDetail')</script>");
         }
         else {
-            response.getWriter().print("<script>alert('判分失败');location.replace('/teacher/browseHomework')</script>");
+            response.getWriter().print("<script>alert('判分失败');location.replace('/teacher/homeworkDetail')</script>");
         }
     }
 

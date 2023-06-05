@@ -17,7 +17,7 @@
         update student set stustate=true where stuid=#{stuid}
     </update>
     <update id="reset">
-        update student set stupwd=MD5(#{newpwd}) where stuid=#{stuid} and stupwd=MD5(#{stupwd})
+        update student set stupwd=MD5(#{newpwd}) where stuid=#{stuid} and stupwd=#{stupwd}
     </update>
     <select id="browseStudent" resultType="com.example.academicadministration.pojo.Student">
         select * from student where stuid like #{condition} or stusex like #{condition} or stuclass like #{condition} or stuorigin like #{condition}
