@@ -6,6 +6,6 @@
     select mangerpwd from manger where mangerid=#{id}
 </select>
     <update id="reset">
-        update manger set mangerpwd=MD5(#{newpwd}) where mangerid=#{mangerid} and MD5(mangerpwd=#{oldpwd})
+        update manger set mangerpwd=MD5(#{newpwd}) where mangerid=#{mangerid} and mangerpwd=MD5(#{oldpwd})
     </update>
 </mapper>
